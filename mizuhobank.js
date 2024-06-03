@@ -1,10 +1,6 @@
-const toNumber = (str) => {
-    return Number(str.replace(/[^0-9]/g,""));
-}
-
 const getBalance = (table) => {
     const tr = table.querySelectorAll("tr");
-    return toNumber(tr[tr.length-2].cells[1].textContent);
+    return Number(tr[tr.length-2].cells[1].textContent.replace(/[^0-9]/g, ''));
 }
 
 const getTable = (table, balance) => {
@@ -12,24 +8,23 @@ const getTable = (table, balance) => {
     tr.shift();
     let data = [];
     for (let i = 0;  i < tr.length;  i++) {
-        data.push(tr[i].cells[0].textContent+"\t"+toNumber(tr[i].cells[1].textContent)+"\t"+toNumber(tr[i].cells[2].textContent)+"\t"+tr[i].cells[3].textContent);
+        const line = new SheetLine();
+        line.setDate(tr[i].cells[0].textContent);
+        line.setOutgo(tr[i].cells[1].textContent);
+        line.setIncome(tr[i].cells[2].textContent);
+        line.setTitle(tr[i].cells[3].textContent.replace());
+        data.push(line);
     }
     for (let i = tr.length - 1;  i >= 0;  i--) {
-        data[i] += "\t" + balance;
-        balance += toNumber(tr[i].cells[1].textContent) - toNumber(tr[i].cells[2].textContent);
+        data[i].setMizuho(balance);
+        balance += data[i].outgo - data[i].income;
     }
-    return data.join("\n");
+    return data;
 }
 
-const showMatrix = () => {
+const getMatrix = () => {
     const tables = document.getElementsByTagName("table");
     const balance = getBalance(tables[tables.length-2]);
-    const data = getTable(tables[tables.length-1], balance);
-    navigator.clipboard.writeText(data).then(() => console.log("ok")).catch((e) => console.error(e));
-    alert(data);
+    return getTable(tables[tables.length-1], balance)
+        .map((x) => x.print()).join("\n");
 }
-
-addEventListener("keydown", (key) => {
-    key.stopPropagation();
-    if (key.key === "v") showMatrix();
-})
