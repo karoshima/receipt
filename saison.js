@@ -17,6 +17,6 @@ const getMatrix = () => {
                 line.setOutgo(tr.getElementsByClassName("read-item-amount")[0].textContent)
                 line.setCard("旧PARCOカード");
                 return line.print();
-            }).join("\n");
+            }).reverse().join("\n");
     }
 }

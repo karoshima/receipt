@@ -42,10 +42,15 @@ class SheetLine {
     }
 
     setDate = (val) => {
-        this.date = val.replace(/[\.年月]/g,'-').replace(/日/g, '');
+        let match = val.match(/(\d\d\d\d)[年\-/](\d\d?)[月\-/](\d\d?)/);
+        if (match) {
+            match.shift();
+            this.date = match.join("-");
+            return;
+        }
     }
     setTitle = (val) => {
-        this.title = val.trim();
+        this.title = val;
     }
     setIncome = (val) => {
         this.income = Number(val.replace(/[^0-9]/g, ''));
@@ -71,7 +76,9 @@ addEventListener("keydown", (key) => {
     key.stopPropagation();
     if (key.key === "v") {
         const data = getMatrix();
-        navigator.clipboard.writeText(data).then(() => console.log("ok")).catch((e) => console.error(e));
-        alert(data);
+        if (data !== "") {
+            navigator.clipboard.writeText(data).then(() => console.log("ok")).catch((e) => console.error(e));
+            alert(data);
+        }
     }
 })

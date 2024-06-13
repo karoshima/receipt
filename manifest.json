@@ -22,6 +22,10 @@
         {
             "matches": [ "https://netanswerplus.saisoncard.co.jp/WebPc/*" ],
             "js": [ "sheet.js", "saison.js" ]
+        },
+        {
+            "matches": [ "https://atunet.uccard.co.jp/*" ],
+            "js": [ "sheet.js", "uccard_meisai.js"]
         }
     ]
 }
