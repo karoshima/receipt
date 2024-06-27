@@ -42,7 +42,7 @@ class SheetLine {
     }
 
     setDate = (val) => {
-        let match = val.match(/(\d\d\d\d)[年\-/](\d\d?)[月\-/](\d\d?)/);
+        let match = val.match(/(\d\d\d\d)[年\-\./](\d\d?)[月\-\./](\d\d?)/);
         if (match) {
             match.shift();
             this.date = match.join("-");
