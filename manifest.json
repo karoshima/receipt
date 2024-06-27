@@ -26,6 +26,10 @@
         {
             "matches": [ "https://atunet.uccard.co.jp/*" ],
             "js": [ "sheet.js", "uccard.js"]
+        },
+        {
+            "matches": [ "https://www.aeon.co.jp/app/" ],
+            "js": [ "sheet.js", "aeon.js" ]
         }
     ]
 }
