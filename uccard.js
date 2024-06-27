@@ -6,7 +6,11 @@ const getMatrix = () => {
         const line = new SheetLine();
         line.setDate(seikyuuinfo[0].textContent.replace(/.*\n.*(\d\d\d\d年.*日).*/, "$1"));
         line.setTitle("富士通トラベランスカード");
-        line.setClaim(document.getElementsByClassName("bankClaimAmount-div-02")[0].textContent);
+        let claim = document.getElementsByClassName("bankClaimAmount-div-01")[0].textContent;
+        if (!claim.includes("円")) {
+            claim = document.getElementsByClassName("claimAmount-div-01")[0].getElementsByClassName("claimAmount-div-02")[0].textContent
+        }
+        line.setClaim(claim);
         return line.print();
     } else {
         // 最近のカード利用

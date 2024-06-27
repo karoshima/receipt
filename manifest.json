@@ -25,7 +25,7 @@
         },
         {
             "matches": [ "https://atunet.uccard.co.jp/*" ],
-            "js": [ "sheet.js", "uccard_meisai.js"]
+            "js": [ "sheet.js", "uccard.js"]
         }
     ]
 }
