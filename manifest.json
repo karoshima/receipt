@@ -30,6 +30,10 @@
         {
             "matches": [ "https://www.aeon.co.jp/app/" ],
             "js": [ "sheet.js", "aeon.js" ]
+        },
+        {
+            "matches": [ "https://www.smbc-card.com/memx/web_meisai/*" ],
+            "js": [ "sheet.js", "smbc.js" ]
         }
     ]
 }

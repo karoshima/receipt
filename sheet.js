@@ -50,7 +50,7 @@ class SheetLine {
         }
     }
     setTitle = (val) => {
-        this.title = val;
+        this.title = val.trim();
     }
     setIncome = (val) => {
         this.income = Number(val.replace(/[^0-9]/g, ''));
