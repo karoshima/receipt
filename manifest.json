@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "receipt",
-    "version": "0.1",
+    "version": "1.0.1",
 
     "description": "popup for excel",
 
@@ -34,6 +34,10 @@
         {
             "matches": [ "https://www.smbc-card.com/memx/web_meisai/*" ],
             "js": [ "sheet.js", "smbc.js" ]
+        },
+        {
+            "matches": [ "https://www.viewsnet.jp/*" ],
+            "js": [ "sheet.js", "bic.js" ]
         }
     ]
 }

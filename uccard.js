@@ -2,29 +2,44 @@ const getMatrix = () => {
     const seikyuuinfo = document.getElementsByClassName("seikyuuinfo");
     if (seikyuuinfo.length > 0) {
         // 銀行請求額
-        console.log(seikyuuinfo[0]);
-        const line = new SheetLine();
-        line.setDate(seikyuuinfo[0].textContent.replace(/.*\n.*(\d\d\d\d年.*日).*/, "$1"));
-        line.setTitle("富士通トラベランスカード");
-        let claim = document.getElementsByClassName("bankClaimAmount-div-01")[0].textContent;
-        if (!claim.includes("円")) {
-            claim = document.getElementsByClassName("claimAmount-div-01")[0].getElementsByClassName("claimAmount-div-02")[0].textContent
+        const date = seikyuuinfo[0].textContent.replace(/.*\n.*(\d\d\d\d年.*日).*/, "$1");
+        let price = document.getElementsByClassName("bankClaimAmount-div-01")[0].textContent;
+        if (!price.includes("円")) {
+            price = document.getElementsByClassName("claimAmount-div-01")[0].getElementsByClassName("claimAmount-div-02")[0].textContent
         }
-        line.setClaim(claim);
-        return line.print();
+        return [
+            new SheetLine(
+                date,
+                "請求に移行",
+                "トラベランス利用",
+                price,
+                0,
+                cardsettlement
+            ).print(),
+            new SheetLine(
+                date,
+                "請求",
+                "トラベランス請求",
+                0,
+                price,
+                cardsettlement
+            ).print()
+        ].join("\n");
     } else {
         // 最近のカード利用
         const trs = Array.from(document.getElementsByClassName("txt-s")[0].getElementsByTagName("tr"));
         trs.shift();
         trs.shift();
         return trs.map(tr => {
-            const line = new SheetLine();
-            tds = tr.getElementsByTagName("td");
-            line.setDate(tds[0].textContent);
-            line.setTitle(tds[2].textContent);
-            line.setOutgo(tds[3].textContent);
-            line.setCard("富士通トラベランスカード");
-            return line.print();
+            const tds = tr.getElementsByTagName("td");
+            return new SheetLine(
+                tds[0].textContent,
+                tds[2].textContent,
+                "トラベランス利用",
+                0,
+                tds[3].textContent,
+                cardsettlement
+            ).print();
         }).reverse().join("\n");
     }
 };

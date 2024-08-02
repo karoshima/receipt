@@ -8,12 +8,13 @@ const getMatrix = () => {
     const trs = Array.from(document.querySelectorAll("table tr"));
     trs.shift();
     return trs.map((tr) => {
-        const line = new SheetLine();
-        line.setDate(date(tr.cells[0].textContent));
-        line.setIncome(tr.cells[1].textContent);
-        line.setOutgo(tr.cells[2].textContent);
-        line.setTitle(tr.cells[3].textContent);
-        line.setYucho(tr.cells[4].textContent);
-        return line.print();
+        return new SheetLine(
+            date(tr.cells[0].textContent),
+            tr.cells[3].textContent,
+            "郵貯",
+            tr.cells[1].textContent,
+            tr.cells[2].textContent,
+            tr.cells[4].textContent
+        ).print();
     }).join("\n");
 }
