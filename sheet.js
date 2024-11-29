@@ -1,5 +1,5 @@
 const toNum = (val) => {
-    return (typeof(val) === "number") ? val : Number(val.replace(/[^0-9]/g, ''));
+    return (typeof(val) === "number") ? val : Number(val.replace(/[^0-9-]/g, ''));
 }
 
 const cardsettlement = '=SUMIF(INDIRECT(ADDRESS(1,COLUMN()-2)):INDIRECT(ADDRESS(ROW(),COLUMN()-2)),INDIRECT(ADDRESS(ROW(),COLUMN()-2)),INDIRECT(ADDRESS(1,COLUMN()-1)):INDIRECT(ADDRESS(ROW(),COLUMN()-1)))';
