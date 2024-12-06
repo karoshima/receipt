@@ -12,7 +12,6 @@ const getTable = () => {
             0,
             div.getElementsByClassName("t1-3")[0].textContent,
         );
-        data.unshift(line.print());
         if (line.title === "セゾン") {
             data.unshift(new SheetLine(
                 line.date,
@@ -53,16 +52,6 @@ const getTable = () => {
                 cardsettlement
             ).print());
         }
-        if (line.title === "イオンフイナンシヤルサ－ビス") {
-            data.unshift(new SheetLine(
-                line.date,
-                "返済",
-                "マルエツカード請求",
-                0,
-                line.delta,
-                cardsettlement
-            ).print());
-        }
         if (line.title === "ビユ－カ－ド") {
             data.unshift(new SheetLine(
                 line.date,
@@ -73,6 +62,7 @@ const getTable = () => {
                 cardsettlement
             ).print());
         }
+        data.unshift(line.print());
     });
     return data;
 }

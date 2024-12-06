@@ -38,5 +38,5 @@ const getMatrix = () => {
                 cardsettlement
             ).print();
         }
-    }).join("\n");
+    }).reverse().join("\n");
 }

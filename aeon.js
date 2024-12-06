@@ -16,7 +16,7 @@ const getMatrix = () => {
     const seikyuElem = document.getElementsByClassName("m-mtpusagepanel_infomation")[0];
     const date = seikyuElem.getElementsByClassName("m-mtpusagepanel_infomation_paymentdate")[0].textContent;
     const price = seikyuElem.getElementsByClassName("a-textprice-large")[0].textContent;
-    meisai.push(
+    meisai.unshift(
         new SheetLine(
             date,
             "請求に移行",
@@ -35,5 +35,5 @@ const getMatrix = () => {
         ).print()
     );
 
-    return meisai.join("\n");
+    return meisai.reverse().join("\n");
 }
